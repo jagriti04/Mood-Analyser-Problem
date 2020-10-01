@@ -63,7 +63,7 @@ public class MoodAnalyserTest
 			mood = moodAnalyser.analyseMood();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			Assert.assertEquals("Enter proper Mood", e.getMessage());
+			Assert.assertEquals("HAPPY", e.getMessage());
 		}
 	}
 }
