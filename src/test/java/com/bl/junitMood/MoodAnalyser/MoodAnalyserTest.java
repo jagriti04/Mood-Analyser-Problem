@@ -1,7 +1,5 @@
 package com.bl.junitMood.MoodAnalyser;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,23 +21,49 @@ public class MoodAnalyserTest
     }
 	
 	@Test
-	public void givenMessage_whenSad_shouldReturnSad() {
-		moodAnalyser.MoodAnalyser("I am in sad mood.");
-		String mood = moodAnalyser.analyseMood();
-		Assert.assertEquals("SAD", mood);
+	public void givenMessage_whenSad_shouldReturnSad() {	
+		String mood;
+		try {
+			moodAnalyser.MoodAnalyser("I am in sad mood.");
+			mood = moodAnalyser.analyseMood();
+			Assert.assertEquals("SAD", mood);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());;
+		}
 	}
 	
 	@Test
 	public void givenMessage_whenHappy_shouldReturnHappy() {
-		moodAnalyser.MoodAnalyser("This is a happy message");
-		String mood = moodAnalyser.analyseMood();
-		Assert.assertEquals("HAPPY", mood);
+		String mood;
+		try {
+			moodAnalyser.MoodAnalyser("This is a happy message");
+			mood = moodAnalyser.analyseMood();
+			Assert.assertEquals("HAPPY", mood);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());;
+		}
 	}
 	
 	@Test
-	public void givenMessage_whenAnymood_shouldReturnHappy() {
-		moodAnalyser.MoodAnalyser("I am in Any Mood");
-		String mood = moodAnalyser.analyseMood();
-		Assert.assertEquals("HAPPY", mood);
+	public void givenMessage_whenAnymood_shouldReturnHappy() {	
+		String mood;
+		try {
+			moodAnalyser.MoodAnalyser("I am in Any Mood");
+			mood = moodAnalyser.analyseMood();
+			Assert.assertEquals("HAPPY", mood);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());;
+		}
+	}
+	@Test
+	public void givenMessage_whenNull_shouldReturnException() {	
+		String mood;
+		try {
+			moodAnalyser.MoodAnalyser(null);
+			mood = moodAnalyser.analyseMood();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			Assert.assertEquals("Enter proper Mood", e.getMessage());
+		}
 	}
 }
