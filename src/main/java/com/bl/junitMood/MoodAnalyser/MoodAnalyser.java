@@ -1,6 +1,5 @@
 package com.bl.junitMood.MoodAnalyser;
 
-
 public class MoodAnalyser 
 {
 	private String  message;
@@ -18,16 +17,18 @@ public class MoodAnalyser
 		return true;
 	}
 	
-	public String analyseMood() {
+	public String analyseMood() throws MoodAnalyserException {
 		try {
+			if (message.length() == 0)
+				throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_EMPTY,"Enter proper ");
 			if (message.contains("sad")) {
 				return "SAD";
 			} else {
 				return "HAPPY";
 			}
-		} catch (Exception e)  {
+		} catch (NullPointerException e)  {
 			System.out.println(e.getMessage());
-			return "HAPPY";
+			throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_NULL, "Enter proper Mood");
 		}
 	}
 	

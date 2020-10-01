@@ -27,7 +27,7 @@ public class MoodAnalyserTest
 			moodAnalyser.MoodAnalyser("I am in sad mood.");
 			mood = moodAnalyser.analyseMood();
 			Assert.assertEquals("SAD", mood);
-		} catch (Exception e) {
+		} catch (MoodAnalyserException e) {
 			System.out.println(e.getMessage());;
 		}
 	}
@@ -39,7 +39,7 @@ public class MoodAnalyserTest
 			moodAnalyser.MoodAnalyser("This is a happy message");
 			mood = moodAnalyser.analyseMood();
 			Assert.assertEquals("HAPPY", mood);
-		} catch (Exception e) {
+		} catch (MoodAnalyserException e) {
 			System.out.println(e.getMessage());;
 		}
 	}
@@ -51,19 +51,32 @@ public class MoodAnalyserTest
 			moodAnalyser.MoodAnalyser("I am in Any Mood");
 			mood = moodAnalyser.analyseMood();
 			Assert.assertEquals("HAPPY", mood);
-		} catch (Exception e) {
+		} catch (MoodAnalyserException e) {
 			System.out.println(e.getMessage());;
 		}
 	}
 	@Test
-	public void givenMessage_whenNull_shouldReturnException() {	
+	public void givenMessage_nullValue_shouldReturnException() {
+		
 		String mood;
 		try {
 			moodAnalyser.MoodAnalyser(null);
 			mood = moodAnalyser.analyseMood();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			Assert.assertEquals("HAPPY", e.getMessage());
+		} catch (MoodAnalyserException e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_NULL, e.exceptionType);
+		}
+	}
+	@Test
+	public void givenMessage_emptyValue_shouldReturnException() {
+		
+		String mood;
+		try {;
+		moodAnalyser.MoodAnalyser("");
+		mood = moodAnalyser.analyseMood();
+		} catch (MoodAnalyserException e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
 		}
 	}
 }
